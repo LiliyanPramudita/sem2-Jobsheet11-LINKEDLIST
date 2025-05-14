@@ -8,7 +8,6 @@ public class SingleLinkedList15 {
     public void print() {
         if (!isEmpty()) {
             Node15 tmp = head;
-            System.out.println("Isi Linked List:");
             while (tmp != null) {
                 tmp.data.tampilInformasi();
                 tmp = tmp.next;
@@ -18,6 +17,7 @@ public class SingleLinkedList15 {
         }
         System.out.println();
     }
+    
 
     public void addFirst(Mahasiswa15 input) {
         Node15 ndInput = new Node15(input, null);
@@ -72,4 +72,87 @@ public class SingleLinkedList15 {
             print();
         }
     }
+    public Mahasiswa15 getData(int index) {
+        Node15 temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        return temp.data;
+    }
+    
+    public int indexOf(String key) {
+        Node15 temp = head;
+        int index = 0;
+        while (temp != null) {
+            if (temp.data.nim.equals(key)) {
+                return index;
+            }
+            temp = temp.next;
+            index++;
+        }
+        return -1;
+    }
+    
+    public void removeFirst() {
+        if (isEmpty()) {
+            System.out.println("Linked list kosong, tidak bisa dihapus");
+        } else if (head == tail) {
+            head = tail = null;
+        } else {
+            head = head.next;
+        }
+        print();
+    }
+    
+    public void removeLast() {
+        if (isEmpty()) {
+            System.out.println("Linked list kosong, tidak bisa dihapus");
+        } else if (head == tail) {
+            head = tail = null;
+        } else {
+            Node15 temp = head;
+            while (temp.next != tail) {
+                temp = temp.next;
+            }
+            temp.next = null;
+            tail = temp;
+        }
+        print();
+    }
+    
+    public void remove(String key) {
+        if (isEmpty()) {
+            System.out.println("Linked list kosong, tidak bisa dihapus");
+        } else {
+            Node15 temp = head;
+            while (temp != null) {
+                if ((temp.next != null) && temp.next.data.nim.equals(key)) {
+                    temp.next = temp.next.next;
+                    if (temp.next == null) {
+                        tail = temp;
+                    }
+                    break;
+                }
+                temp = temp.next;
+            }
+        }
+        print();
+    }
+    
+    public void removeAt(int index) {
+        if (index == 0) {
+            removeFirst();
+        } else {
+            Node15 temp = head;
+            for (int i = 0; i < index - 1; i++) {
+                temp = temp.next;
+            }
+            temp.next = temp.next.next;
+            if (temp.next == null) {
+                tail = temp;
+            }
+            print();
+        }
+    }
+    
 }
